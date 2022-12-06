@@ -3,6 +3,7 @@ title: "今から始める Compute Engine の第一歩"
 emoji: "😺"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["googlecloud","gcp","compute","vm","cloud"]
+publication_name: "google_cloud_jp"
 published: true
 ---
 
