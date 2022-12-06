@@ -3,7 +3,7 @@ title: "今から始める Compute Engine の第一歩"
 emoji: "😺"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["googlecloud","gcp","compute","vm","cloud"]
-published: false
+published: true
 ---
 
 [Google Cloud Japan Advent Calender 2022 (今から始める Google Cloud)](https://zenn.dev/google_cloud_jp/articles/12bd83cd5b3370) の 5 日目です！
