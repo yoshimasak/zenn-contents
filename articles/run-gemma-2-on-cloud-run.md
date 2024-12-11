@@ -1,5 +1,5 @@
 ---
-title: "Gemma 2 を Cloud Run で動かしてみるのは現実的なのか試してみた"
+title: "Gemma 2 を Cloud Run で動かすのは現実的なのか試してみた"
 emoji: "😺"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["googlecloud","gcp","Cloud Run","生成 AI","cloud","Gemma"]
