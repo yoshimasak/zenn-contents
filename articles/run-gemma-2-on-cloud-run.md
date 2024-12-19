@@ -9,7 +9,7 @@ published: true
 
 [Google Cloud Japan Advent Calendar 2024](https://zenn.dev/google_cloud_jp/articles/7799cce9f23cf0) の 10 日目にリリースすることを目指していた記事です。
 
-本日のテーマは Cloud Run で Gemma 2 を動かす方法、そして GKE を利用した場合の違いについて簡単にご紹介する記事です。GKE で Gemma 2 を動かす方法については今年のアドベント カレンダーの 3 日目の記事である [Gemma2 を GKE 上でいい感じに動かしたい (推論編)](https://zenn.dev/google_cloud_jp/articles/gemma2-on-gke) に解説がありますので、よろしければそちらも併せて読んでいただけますと幸いです。
+本日のテーマは Cloud Run で Gemma 2 を動かす方法、そして GKE を利用した場合との違いについて簡単にご紹介する記事です。GKE で Gemma 2 を動かす方法については今年のアドベント カレンダーの 3 日目の記事である [Gemma2 を GKE 上でいい感じに動かしたい (推論編)](https://zenn.dev/google_cloud_jp/articles/gemma2-on-gke) に解説がありますので、よろしければそちらも併せて読んでいただけますと幸いです。
 
 なお、本記事はあくまでも Cloud Run がメインなので推論ライブラリのパラメータなどのチューニングは扱いません。また、Cloud Run と GKE のどちらかのみをおすすめするという趣旨でもありません。言語モデルをホストする際に Cloud Run と GKE のどちらを使えばいいのかをご選択いただく際の参考情報になればと思っています。
 
@@ -224,7 +224,7 @@ Status Codes  [code:count]                      0:2820  200:15180
 これらの結果から、Gemma 2 2B などの軽量なモデルであれば Cloud Run で非常に簡単、かつ高いスケーラビリティでホストできることがわかります。
 
 # Cloud Run 上に Gemma 2 9B をデプロイする
-続いて Gemma 2 9B をデプロイしてみます。Gemma 2 2B と比較してモデルサイズも大きいため、コンテナ イメージにモデルを含めるのはインスタンス デプロイ時のイメージ Pull の時間が果てしなくなってしまうので現実的ではありません。試しに上記の手順で [google/gemma-2-9b](https://huggingface.co/google/gemma-2-9b) を含むコンテナ イメージを作成したところ、およそ 40GB になりました。そのため、Gemma 2 9B の場合はあらかじめモデルをストレージにダウンロードしておき、vLLM のみを含むイメージを Cloud Run で動かす際にストレージからモデルをダウンロードするように構成します。
+続いて Gemma 2 9B をデプロイしてみます。Gemma 2 2B と比較してモデルサイズも大きいため、コンテナ イメージにモデルを含めるのはインスタンス デプロイ時のイメージ Pull の時間も長くなり、実運用においては現実的ではありません。試しに上記の手順で [google/gemma-2-9b](https://huggingface.co/google/gemma-2-9b) を含むコンテナ イメージを作成したところ、およそ 40GB になりました。そのため、Gemma 2 9B の場合はあらかじめモデルをストレージにダウンロードしておき、vLLM のみを含むイメージを Cloud Run で動かす際にストレージからモデルをダウンロードするように構成します。
 
 ## モデルのダウンロード
 Cloud Run では [Cloud Storage](https://cloud.google.com/run/docs/configuring/services/cloud-storage-volume-mounts?hl=ja) や [NFS](https://cloud.google.com/run/docs/configuring/services/nfs-volume-mounts?hl=ja) でストレージをマウントできます。検証に際して Cloud Storage と Filestore の両方を試した結果、Cloud Storage ではモデルのダウンロードに時間がかかるため、今回は Filestore を利用します。
